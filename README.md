@@ -1,29 +1,42 @@
-# Fluent Infrastructure
+# Инфраструктура Fluent
 
-This repository stores organization-wide infrastructure configuration for Fluent Labs Manager.
+В этом репозитории хранится общая инфраструктурная конфигурация Fluent Labs
+Manager.
 
-## Main branch ruleset
+> **Конфигурации приложений:** порядок работы с конфигами Doppler, локальной
+> разработкой и GitHub Environments описан в [инструкции Doppler](docs/doppler.md).
 
-The [`main-branch-ruleset.json`](rulesets/main-branch-ruleset.json) file defines the active repository ruleset for the default branch (`main`). Its purpose is to keep the branch stable, reviewed, and continuously checked before changes are merged.
+## Правила для ветки `main`
 
-### Protected operations
+Файл [`main-branch-ruleset.json`](rulesets/main-branch-ruleset.json) задаёт
+активный набор правил для основной ветки (`main`). Его задача — сохранять ветку
+стабильной, проверенной и защищённой до слияния изменений.
 
-- Deleting the default branch is blocked.
-- Non-fast-forward updates are blocked, so force-pushing to `main` is not allowed.
+### Защищённые операции
 
-### Pull request requirements
+- Удаление основной ветки запрещено.
+- Обновления без fast-forward запрещены, поэтому принудительная отправка
+  изменений (`force push`) в `main` невозможна.
 
-Changes to `main` must be merged through a pull request that has:
+### Требования к pull request
 
-- At least one approving review.
-- Stale approvals dismissed when new commits are pushed.
-- All review threads resolved before merge.
-- An additional approval when a change is not attributed to a GitHub user.
+Изменения в `main` можно вносить только через pull request, для которого:
 
-Merge commits, squash merges, and rebase merges are all permitted. Code-owner review and approval of the last push are not currently required.
+- есть как минимум одно одобрение;
+- устаревшие одобрения сбрасываются после появления новых коммитов;
+- все review-комментарии разрешены;
+- требуется дополнительное одобрение, если изменение не связано с учётной
+  записью GitHub.
 
-### Automated checks and reviews
+Разрешены merge commit, squash merge и rebase merge. Проверка владельцами кода
+и одобрение последнего push сейчас не требуются.
 
-- Required status checks are enabled, but no individual check is currently configured as mandatory and the ruleset does not require branches to be up to date before merging.
-- Code scanning is enforced with CodeQL: security alerts must be `high` severity or higher, and alert results must have the `error` level.
-- Copilot code review runs for every push, including draft pull requests.
+### Автоматические проверки и ревью
+
+- Обязательные статус-проверки включены, но конкретные проверки пока не
+  назначены обязательными, и правила не требуют, чтобы ветка была актуальна
+  перед слиянием.
+- Сканирование кода CodeQL включено: учитываются security-уведомления уровней
+  `high` и выше, а результаты анализа должны иметь уровень `error`.
+- Copilot code review запускается для каждого push, включая черновые pull
+  request.
