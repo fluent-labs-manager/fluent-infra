@@ -6,6 +6,10 @@ Manager.
 > **Конфигурации приложений:** порядок работы с конфигами Doppler, локальной
 > разработкой и GitHub Environments описан в [инструкции Doppler](docs/doppler.md).
 
+## Архитектура приложения
+
+Подробную схему и описание архитектуры приложения можно посмотреть [тут](./docs/app-architecture.md)
+
 ## Правила для ветки `main`
 
 Файл [`main-branch-ruleset.json`](rulesets/main-branch-ruleset.json) задаёт
